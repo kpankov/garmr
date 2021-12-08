@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Testbeds</h2>
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Testbed</th>
+        <th>Address</th>
+        <th>Occupied</th>
+    </tr>
+    {% for tb in testbeds %}
+    <tr>
+        <td>{{ tb["name"] }}</td>
+        <td>{{ tb["address"] }}</td>
+        <td>Yes</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
