@@ -69,9 +69,13 @@ if __name__ == "__main__":
             data["user"] = "many"
 
         res = subprocess.getoutput("netstat -an")
-        for server_client in re.findall(r"\s*TCP\s*([0-9\.]+):3389\s*([0-9\.]+):[0-9]+\s*ESTABLISHED", res):
+        res_parsed = re.findall(r"\s*TCP\s*([0-9\.]+):3389\s*([0-9\.]+):[0-9]+\s*ESTABLISHED", res)
+        if len(res_parsed) == 0:
+            data["occupied"] = False
+        for server_client in res_parsed:
             if server_client[1] != "127.0.0.1":
-                print(server_client[1])
+                print("User IP={}".format(server_client[1]))
+                data["occupied"] = True
 
         send_data(data)
 
