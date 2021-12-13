@@ -74,7 +74,7 @@ if __name__ == "__main__":
             data["occupied"] = False
         for server_client in res_parsed:
             if server_client[1] != "127.0.0.1":
-                print("User IP={}".format(server_client[1]))
+                logger.info("User IP={}".format(server_client[1]))
                 data["occupied"] = True
 
         send_data(data)
