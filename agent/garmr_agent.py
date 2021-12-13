@@ -9,7 +9,7 @@ import requests
 from requests.structures import CaseInsensitiveDict
 from urllib3.response import log
 
-url = "http://127.0.0.1:5000/client/"
+url = "http://10.50.36.55:8080/client/"
 
 step = 0
 
@@ -62,8 +62,11 @@ if __name__ == "__main__":
         res = subprocess.getoutput("qwinsta")
         users = re.findall(r">([\S_-]+)\s*([\S_-]+)", res)
         logger.info("qwinsta: {}".format(users))
+
         if len(users) == 1:
-            data["users": str(users[0][1])]
+            data["user"] = users[0][1]
+        else:
+            data["user"] = "many"
 
         res = subprocess.getoutput("netstat -an")
         for server_client in re.findall(r"\s*TCP\s*([0-9\.]+):3389\s*([0-9\.]+):[0-9]+\s*ESTABLISHED", res):
